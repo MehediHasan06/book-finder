@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Book from "src/components/Book"
 import Filter from "src/components/Filter"
 import Navbar from "src/components/Navbar"
@@ -5,6 +6,8 @@ import SearchBar from "src/components/SearchBar"
 import booksData from "/src/assets/books.json"
 
 export default function Home() {
+  const [searchedBooks, setSearchedBooks] = useState(booksData)
+
   return (
     <>
       <Navbar />
@@ -18,7 +21,11 @@ export default function Home() {
                 Trending Books of the Year
               </h2>
               {/* search bar */}
-              <SearchBar />
+              <SearchBar
+                // setSearchValue={setSearchValue}
+                setSearchedBooks={setSearchedBooks}
+                booksData={booksData}
+              />
             </div>
 
             {/* filter */}
@@ -30,7 +37,7 @@ export default function Home() {
 
         {/* Books Grids */}
         <div className="container mx-auto grid grid-cols-1 gap-8 max-w-7xl md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {booksData.map((book) => {
+          {searchedBooks.map((book) => {
             return <Book key={book.id} book={book} />
           })}
         </div>
