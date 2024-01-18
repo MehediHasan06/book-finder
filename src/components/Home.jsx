@@ -7,6 +7,7 @@ import booksData from "/src/assets/books.json"
 
 export default function Home() {
   const [searchedBooks, setSearchedBooks] = useState(booksData)
+  // eslint-disable-next-line no-unused-vars
   const [sortBy, setSortBy] = useState("")
 
   const handleSortChange = (e) => {
