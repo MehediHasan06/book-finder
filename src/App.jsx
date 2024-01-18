@@ -1,7 +1,9 @@
+import Navbar from "src/components/Navbar"
+
 function App() {
   return (
     <>
-      <h1 className="text-red-500 font-bold text-2xl">Book Finder</h1>
+      <Navbar />
     </>
   )
 }
