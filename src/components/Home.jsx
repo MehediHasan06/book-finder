@@ -7,6 +7,34 @@ import booksData from "/src/assets/books.json"
 
 export default function Home() {
   const [searchedBooks, setSearchedBooks] = useState(booksData)
+  const [sortBy, setSortBy] = useState("")
+
+  const handleSortChange = (e) => {
+    const selectedSortBy = e.target.value
+    setSortBy(selectedSortBy)
+
+    // Perform sorting based on the selected option
+    let sortedBooks = searchedBooks.slice() // Create a copy of the array
+    switch (selectedSortBy) {
+      case "name_asc":
+        sortedBooks.sort((a, b) => a.title.localeCompare(b.title))
+        break
+      case "name_desc":
+        sortedBooks.sort((a, b) => b.title.localeCompare(a.title))
+        break
+      case "year_asc":
+        sortedBooks.sort((a, b) => a.publishYear - b.publishYear)
+        break
+      case "year_desc":
+        sortedBooks.sort((a, b) => b.publishYear - a.publishYear)
+        break
+      default:
+        // No sorting
+        break
+    }
+
+    setSearchedBooks(sortedBooks)
+  }
 
   return (
     <>
@@ -29,7 +57,7 @@ export default function Home() {
 
             {/* filter */}
             <div className="flex items-stretch space-x-3">
-              <Filter />
+              <Filter onChange={handleSortChange} />
             </div>
           </div>
         </header>
