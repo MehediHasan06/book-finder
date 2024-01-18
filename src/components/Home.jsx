@@ -22,7 +22,6 @@ export default function Home() {
               </h2>
               {/* search bar */}
               <SearchBar
-                // setSearchValue={setSearchValue}
                 setSearchedBooks={setSearchedBooks}
                 booksData={booksData}
               />

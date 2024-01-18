@@ -1,15 +1,22 @@
 /* eslint-disable react/prop-types */
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 import BookLogo from "src/assets/book.png"
 import Star from "src/assets/star.svg"
 
 export default function Book({ book }) {
   const { title, author, price, ratings, publishYear } = book
+  const [toggleFavourite, setToggleFavourite] = useState(false)
+
+  // implement star ratings UI
   const starRatings = Array.from({ length: ratings }, (_, index) => (
     <Fragment key={index}>
       <img src={Star} alt="star" />
     </Fragment>
   ))
+
+  const handleFavouriteClick = () => {
+    setToggleFavourite(!toggleFavourite)
+  }
 
   return (
     <div className="space-y-3">
@@ -55,10 +62,16 @@ export default function Book({ book }) {
             </svg>
             Add to Cart
           </button>
-          <button className="flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#1C4336]/[14%] py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5">
+          <button
+            className={`flex min-w-[132px] items-center justify-center gap-1 rounded-md bg-[#1C4336]/[14%] py-1.5 text-[#1C4336] transition-all hover:bg-[#1C4336]/[24%] lg:py-1.5 ${
+              toggleFavourite &&
+              "text-[#DC2954] transition-all hover:bg-[#DC2954]/[24%] lg:py-1.5 bg-[#DC2954]/[14%]"
+            }`}
+            onClick={handleFavouriteClick}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              fill={`${toggleFavourite ? "#DC2954" : "none"}`}
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
